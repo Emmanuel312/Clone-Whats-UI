@@ -1,22 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 import Routes from "./routes";
 import Statusbar from "./components/StatusBar";
-import Colors from "./utils/Theme";
 import AppBar from "./components/AppBar";
 import Theme from "./utils/Theme";
 
 export default function Src() {
-  let scheme = useColorScheme();
-  scheme = "dark";
-  const theme = scheme === "dark" ? Theme.dark : Theme.light;
-  console.log(scheme);
+  const appearance = useColorScheme();
+  const [theme, setTheme] = useState(null);
+  const [scheme, setScheme] = useState(appearance);
+
+  useEffect(() => {
+    const theme = scheme === "light" ? Theme.light : Theme.dark;
+    setTheme(theme);
+  }, [scheme]);
+
+  function handleToggleTheme() {
+    setScheme(scheme === "light" ? "dark" : "light");
+  }
 
   return (
     <AppearanceProvider>
-      <Statusbar backgroundColor={theme.statusBar} />
-      <AppBar theme={theme} />
-      <Routes theme={theme} />
+      {theme && (
+        <>
+          <Statusbar backgroundColor={theme.statusBar} />
+          <AppBar theme={theme} handleToggleTheme={handleToggleTheme} />
+          <Routes theme={theme} />
+        </>
+      )}
     </AppearanceProvider>
   );
 }

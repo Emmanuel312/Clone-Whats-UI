@@ -1,5 +1,6 @@
 import React from "react";
 import { useTheme } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 import {
   Container,
   Photo,
@@ -7,7 +8,8 @@ import {
   Content,
   Name,
   LastMessage,
-  Time
+  Time,
+  MessageView
 } from "./styles";
 
 export default function Conversation({
@@ -25,9 +27,16 @@ export default function Conversation({
       <Aside theme={theme}>
         <Content>
           <Name theme={theme}>{name}</Name>
-          <LastMessage>{lastMessage}</LastMessage>
+          <MessageView>
+            <Ionicons
+              name="ios-checkmark"
+              size={25}
+              color={theme.common}
+            ></Ionicons>
+            <LastMessage theme={theme}>{lastMessage}</LastMessage>
+          </MessageView>
         </Content>
-        <Time>{timestamp}</Time>
+        <Time theme={theme}>{timestamp}</Time>
       </Aside>
     </Container>
   );

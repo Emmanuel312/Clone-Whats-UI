@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Container, Conversations, Separator } from "./styles";
-
+import { Container, Conversations } from "./styles";
+import ActionButton from "react-native-action-button";
 import api from "../../services/api";
 import { format, parseISO } from "date-fns";
 import Conversation from "../../components/Conversation";
-
+import { useTheme } from "@react-navigation/native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 export default function Chats() {
+  const theme = useTheme();
   const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
@@ -40,6 +42,12 @@ export default function Chats() {
         keyExtractor={item => item.id}
         extraData={conversations}
       />
+      <ActionButton
+        buttonColor={theme.actionButton}
+        renderIcon={() => (
+          <MaterialCommunityIcons name="message-text" color="#fff" size={20} />
+        )}
+      ></ActionButton>
     </Container>
   );
 }

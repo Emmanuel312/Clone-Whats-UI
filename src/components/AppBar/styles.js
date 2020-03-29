@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import Colors from "../../utils/Theme";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export const Container = styled.View`
@@ -16,18 +15,19 @@ export const Content = styled.View`
 `;
 export const Title = styled.Text`
   font-size: 20px;
-  color: ${Colors.light.common};
+  color: ${props => props.theme.appBar};
 `;
 export const Aside = styled.View`
   flex-direction: row;
   justify-content: center;
 `;
 export const Search = styled(MaterialIcons)`
-  color: ${Colors.light.common};
+  color: ${props => props.theme.appBar};
   font-size: 25px;
   margin-right: 20px;
 `;
 export const Options = styled(MaterialIcons)`
-  color: ${Colors.light.common};
+  color: ${props => props.theme.appBar};
   font-size: 25px;
 `;
+export const OptionsView = styled.TouchableOpacity``;
